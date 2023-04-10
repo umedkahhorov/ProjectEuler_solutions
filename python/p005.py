@@ -40,7 +40,7 @@ def compute(k,p):
     N,i = 1,0
     check = True
     lim = math.sqrt(k)
-    a = [0,0,0,0,0,0,0,0]
+    a = np.zeros_like(p)
     while p[i] < k:
         #print (p[i-1])
         a[i] = 1

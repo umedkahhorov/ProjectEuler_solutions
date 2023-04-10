@@ -1,0 +1,23 @@
+    sort (prime_factors.begin(),prime_factors.end());
+    auto it = unique(prime_factors.begin(),prime_factors.end());
+    vector<int> n(prime_factors.begin(),it);
+    vector<int> m;
+    for (auto i = n.begin();i != n.end();++i){
+        m.push_back(count(prime_factors.begin(),prime_factors.end(),*i));
+    }
+
+
+    auto result = prime_factorization(10);
+    vector<int> n = result.first;
+    vector<int> m = result.second;
+    for (size_t i = 0; i < n.size(); ++i) {
+        cout << "n[" << i << "] = " << n[i] << ", m[" << i << "] = " << m[i] << endl;
+    }
+    return 0;
+
+        vector<int> factors = prime_factorization(20);
+    for (int i = 0; i < factors.size(); i++)
+    {
+        cout<<factors[i]<<' ';
+    }
+    cout << '\n';
