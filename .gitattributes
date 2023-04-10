@@ -1,7 +1,2 @@
-#* linguist-vendored
-#*.cpp linguist-vendored=false
-#*.py linguist-vendored=false
-#*.py    text diff=python
-#*.cpp   text diff=cpp
-*.bla linguist-language=BlaLang
-*.bl linguist-language=BlaLanfd
+* linguist-vendored
+*.cpp linguist-vendored=false
