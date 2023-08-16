@@ -35,6 +35,20 @@ def isPrime(n):
                 return False
             f = f + 6
         return True
+# given int x -- returns int floor(sqrt(x))
+def sqrt(x)->int:
+    assert x>=0
+    i: int = 1
+    while i*i<=x:
+        i *=2
+    y: int = 0
+    while i>0:
+        if (y + i)**2<=x:
+            y += i
+        i //=2 # i = i // 2
+    return y
+
+
 
 
 
