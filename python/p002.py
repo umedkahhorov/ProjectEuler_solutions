@@ -1,13 +1,40 @@
-# multiples of 3 and 5
+# Even Fibonacci numbers
+import numpy as np
+import time
 
-def multiples_sum(a,b,limit):
+def fibonacci_sum(n):
     """
-    find the sum all the multiples of a and b below limit
+    sum even Fibonacci numbers
     """
-    sum_ab = [i for i in range(1,limit) if i%3==0 or i%5 == 0]
-
-    return sum(sum_ab)
-
+    ans = 0
+    x = 1
+    y = 2
+    while x<=n:
+        if x%2==0:
+            ans +=x 
+        x,y = y,x+y
+    return ans
+def fibonacci_sum2(n):
+    """
+    sum even Fibonacci numbers up to n using dynamic programming
+    """
+    ans = 0
+    fib = [0,1,2]
+    while fib[-1]<=n:
+        if fib[-1]%2 ==0:
+            ans +=fib[-1]
+        fib.append(fib[-1] + fib[-2])
+    return ans
+n = int(4e6)
 if __name__ == "__main__":
     print ('Project Euler 1')
-    print (multiples_sum(3,5,1000))
+    t1 = time.time()
+    out = fibonacci_sum(int(4e+6))
+    t2  = time.time()
+    print (out,t2-t1)
+
+    t1 = time.time()
+    out = fibonacci_sum2(int(4e+6))
+    t2  = time.time()
+    print (out,t2-t1)
+

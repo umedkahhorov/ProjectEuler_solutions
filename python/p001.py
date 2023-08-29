@@ -1,18 +1,13 @@
-# Even Fibonacci numbers
-import numpy as np
+# multiples of 3 and 5
 
-def fibonacci_sum(n):
+def multiples_sum(a,b,limit):
     """
-    sum even Fibonacci numbers
+    find the sum all the multiples of a and b below limit
     """
-    ans = 0
-    x = 1
-    y = 2
-    while x<=n:
-        if x%2==0:
-            ans +=x 
-        x,y = y,x+y
-    return ans
+    sum_ab = [i for i in range(1,limit) if i%3==0 or i%5 == 0]
+
+    return sum(sum_ab)
+
 if __name__ == "__main__":
     print ('Project Euler 1')
-    print (fibonacci_sum(int(4e+6)))
+    print (multiples_sum(3,5,1000))
