@@ -1,31 +1,31 @@
-def leap_year_check(year):
-    if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
-        return True
-    else:
-        return False
+import math
+def sum_divisors(n):
+    # Function to calculate the sum of divisors of a number
+    div_sum = 1
+    sqrt_num = int(n ** 0.5)
+    #sqrt_num = math.sqrt(n)
+    for i in range(2, sqrt_num + 1):
+        if n % i == 0:
+            div_sum += i
+            if i != n // i:
+                div_sum += n // i
+    return div_sum
 
-def compute(year, day_names=['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun']):
-    leap = leap_year_check(year)
-    if leap:
-        months = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-    else:
-        months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-    flattened_days = [day for days_in_month in months for day in range(1, days_in_month + 1)]
-    weeks = len(flattened_days) // 7
-    weeksr = len(flattened_days) % 7
-    days = day_names * weeks
-    days = days + days[:weeksr]
-    indixes = [index for index, value in enumerate(flattened_days) if value == 1]
-    count_sundays = sum(1 for index in indixes if days[index] == 'Sun')
-    start_index = day_names.index(days[-1])
-    reordered_days = day_names[start_index:] + day_names[:start_index]
-    return count_sundays, reordered_days
+# Find abundant numbers up to a certain limit (e.g., 28123)
+limit = 28123
+abundant_numbers = []
+for i in range(12, limit + 1):
+    if sum_divisors(i) > i:
+        abundant_numbers.append(i)
 
-if __name__ == "__main__":
-    sundays1900, names = compute(1900)
-    out = sundays1900  # Initialize with the correct count for 1900
-    for i in range(1901, 2001):  # Starting from 1901
-        sundays, days = compute(i, names)
-        out += sundays
-        names = days
-    print(out)
+# Create a set of all numbers that can be represented as the sum of two abundant numbers
+abundant_sums = set()
+for i in abundant_numbers:
+    for j in abundant_numbers:
+        if i + j <= limit:
+            abundant_sums.add(i + j)
+print (abundant_sums)
+# Find the sum of all positive integers that cannot be written as the sum of two abundant numbers
+result = sum(i for i in range(limit + 1) if i not in abundant_sums)
+
+print("The sum of all positive integers that cannot be written as the sum of two abundant numbers is:", result)
