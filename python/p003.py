@@ -1,5 +1,8 @@
 import numpy as np
 import sys
+"""
+What is the largest prime factor of the number
+"""
 def prime_factorization_by_division():
     n = int(sys.argv[1])
     prime_factors = []
