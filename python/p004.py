@@ -1,6 +1,6 @@
 import numpy as np
 import sys
-
+"""Find the largest palindrome made from the product of two 3-digit numbers."""
 def palindromic_number_v1():
     ans = max(i*j
             for i in range(100,1000)
