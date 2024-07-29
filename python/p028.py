@@ -50,3 +50,20 @@ def compute():
     ans+= sum(4*i*i-6*(i-1) for i in range(3,n+1,2))
     return ans
 compute()
+# solution 3
+def compute_diagonal_sum(n):
+    total_sum = 1  # Starting with the center value
+    current_value = 1
+    
+    for layer in range(1, (n // 2) + 1):
+        side_length = 2 * layer
+        for corner in range(4):
+            current_value += side_length
+            total_sum += current_value
+            
+    return total_sum
+
+# Example usage
+n = 1001
+result = compute_diagonal_sum(n)
+print(f"The sum of the numbers on the diagonals in a {n}x{n} spiral is {result}.")
