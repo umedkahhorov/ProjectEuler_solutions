@@ -38,3 +38,15 @@ def compute():
         out+=diagonals(i)
     return out
 print (compute()+1)
+# solution 2 
+# the top right corner n^2
+# the top left corner n^2 - (n - 1)
+# the bottom left  n^2 - 2(n - 1)
+# the bottom right is n^2 - 3(n - 1)
+# final  4n^2 - 6(n - 1)
+def compute():
+    n=1001
+    ans=1
+    ans+= sum(4*i*i-6*(i-1) for i in range(3,n+1,2))
+    return ans
+compute()
