@@ -1,4 +1,4 @@
-import numpy as np
+#import numpy as np
 import sys
 # find Find the 10001st prime
 def prime_factorization(n):
