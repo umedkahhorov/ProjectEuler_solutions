@@ -2,6 +2,7 @@
 585(10 ​=1001001001(2)​.
 Read 585 from left to right or right to left—it’s the same sequence of digits, 
 so it’s a decimal palindrome
+ans = 872187
 """
 def is_palindromic_base(n):
     """
