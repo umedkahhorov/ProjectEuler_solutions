@@ -6,6 +6,7 @@
 # a + b = p^2 + 2ab / 2p
 # b = p^2 - 2ap / 2p - 2a
 # b go up to (p-a)//2+1 -> b<=c or c >= b, a<=b<=c
+# 840->16
 
 import math
 import time
