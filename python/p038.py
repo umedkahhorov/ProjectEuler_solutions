@@ -28,6 +28,28 @@ def compute():
             n += 1
     return largest_pandigital
 
+
+def panProduct(num,arr):
+    product = ""
+    for i in arr:
+        product += str(i*num)
+    return int(product)
+
+arr = [1]
+best = 0
+testProduct = 0
+for i in range(2,10):
+    arr.append(i)
+    testNum = 1
+    while testProduct<1000000000:
+        testProduct = panProduct(testNum,arr)
+        if testProduct>best and testProduct<1000000000 and "".join(sorted(str(testProduct)))=="123456789":
+            best = testProduct
+        testNum += 1
+
+print(best)
+
+
 if __name__ == "__main__":
     t1 = time.time()
     print(compute())
