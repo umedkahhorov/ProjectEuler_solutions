@@ -48,18 +48,26 @@ for i in range(2,10):
         testNum += 1
 
 print(best)
-
-from itertools import count, imap 
-def ispandigital( seed):
-   digits = str( seed)
-   for i in count(2):
-      ndig = len( digits)
-      if ndig < 9: digits += str( seed * i)
-      elif ndig == 9 and set( digits) == set( '123456789'):
-         return int( digits)
-      else: return False
-
-    print (max( imap( ispandigital, xrange( 1, 10000))))
+###
+from itertools import count
+def ispandigital(n):
+    digits=""
+    # Multiply 'n' by increasing integers starting from 1
+    for i in count(1):
+        # # Concatenate the product to the digits string
+        digits +=str(n*i)
+        # # If exactly 9 digits, check pandigital condition
+        if len(digits) == 9:
+            # Check if all digits 1-9 are present exactly once
+            if set(digits) == set("123456789"):
+                return int(digits)
+            # Not pandigital
+            else:
+                return 0
+            # If more than 9 digits, stop checking
+        elif len(digits)>9:
+            return 0
+print (max( map( ispandigital, range( 1, 10000))))
 
 
 if __name__ == "__main__":
