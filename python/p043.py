@@ -36,6 +36,25 @@ def compute():
             result += pandigital
     return result
 
+def compute_v2():
+    result = 0
+    # Iterate directly over permutations of "0123456789"
+    for p in permutations("0123456789"):
+        # p is a tuple of single-character strings; join once to build the full number
+        # Note: p[1:4] corresponds to the 3-digit substring for divisibility by 2, p[2:5] for 3, etc.
+        if (int("".join(p[1:4])) % 2  == 0 and
+            int("".join(p[2:5])) % 3  == 0 and
+            int("".join(p[3:6])) % 5  == 0 and
+            int("".join(p[4:7])) % 7  == 0 and
+            int("".join(p[5:8])) % 11 == 0 and
+            int("".join(p[6:9])) % 13 == 0 and
+            int("".join(p[7:10])) % 17 == 0):
+                # If all properties hold, convert the entire tuple to an integer and add it to the result.
+                result += int("".join(p))
+    return result
+
+print(compute())
+
 if __name__ == "__main__":
     #n = 9876325041
     #print(ispandigital(n))
@@ -43,4 +62,5 @@ if __name__ == "__main__":
     #print(ispandigital(n))
     #print(generate_all_0_to_9_pandigital())
     #print(generate_all_0_to_9_pandigital_v2())
-    print(compute())
+    #print(compute())
+    print(compute_v2())
