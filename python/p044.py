@@ -1,6 +1,6 @@
 # pentagon numbers Pn = n(3n-1)/2: 1,5,12,22,35,...
 # Pi and Pk, thier sum and difference are pentagon numbers, D = |Pk-Pi| is minised
-
+# (D=5482660, (j=1020, k=2167))
 import numpy as np
 import random
 import time
