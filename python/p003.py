@@ -2,6 +2,11 @@ import numpy as np
 import sys
 """
 What is the largest prime factor of the number
+A prime number is a number that:
+    Is greater than 1
+    Can only be divided evenly by 1 and itself
+Prime factors of a number
+    prime numbers that, when multiplied together, give you the original number.
 """
 def prime_factorization_by_division():
     n = int(sys.argv[1])
