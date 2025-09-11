@@ -1,5 +1,6 @@
 import numpy as np
 import math
+from math import isqrt
 
 def if_prime(n: int)-> bool:
     if n<=1:
@@ -48,6 +49,24 @@ def sqrt(x)->int:
         i //=2 # i = i // 2
     return y
 
+def get_prime_list(limit):
+    "sieve_of_eratosthenes returns a list of primes <= limit"
+    sieve = [True] * (limit + 1)
+    sieve[0] = sieve[1] = False
+    for i in range(2, isqrt(limit) + 1):
+        if sieve[i]:
+            for j in range(i*i, limit+1, i):
+                sieve[j] = False
+    return [i for i, is_prime in enumerate(sieve) if is_prime]
+def is_prime_list(limit):
+    "sieve_of_eratosthenes returns a list of true/false for primes <= limit"
+    sieve = [True] * (limit + 1)
+    sieve[0] = sieve[1] = False
+    for i in range(2, int(limit**0.5) + 1):
+        if sieve[i]:
+            for j in range(i*i, limit+1, i):
+                sieve[j] = False
+    return  sieve 
 
 
 
