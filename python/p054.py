@@ -1,3 +1,4 @@
+# 376
 with open("../0054_poker.txt", "r") as f:
     HANDS = []
     # line by line read and append to list
