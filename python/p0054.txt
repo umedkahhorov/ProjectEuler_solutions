@@ -1,0 +1,79 @@
+with open("../0054_poker.txt", "r") as f:
+    HANDS = []
+    # line by line read and append to list
+    for line in f:
+        HANDS.append(line.strip())
+RANKS = "23456789TJQKA"
+SUITS = "SHCD"
+
+def parse_card(card):
+    # 
+    return RANKS.index(card[0]), SUITS.index(card[1]) 
+
+def get_straight_high_rank(ranks):
+	for i in reversed(range(3, len(ranks))):
+		for j in range(5):
+			if ranks[(i - j + 13) % 13] == 0:
+				break  # Current offset is not a straight
+		else:  # Straight found
+			return i
+	return -1
+def get_5_frequent_highest_cards(ranks, rankshist):
+	result = 0
+	count = 0
+	
+	for i in reversed(range(len(rankshist))):
+		for j in reversed(range(len(ranks))):
+			if ranks[j] == i:
+				for k in range(i):
+					if count >= 5:
+						break
+					result = result << 4 | j
+					count += 1
+	
+	if count != 5:
+		raise ValueError()
+	return result
+def get_score(hand):
+	assert len(hand) == 5
+	
+	# rankcounts[i] is the number of cards with the rank of i
+	rankcounts = [sum(1 for (rank, _) in hand if rank == i) for i in range(13)]
+	
+	# rankcounthist[i] is the number of times a rank count of i occurs.
+	# For example if there is exactly one triplet, then rankcounthist[3] = 1.
+	rankcounthist = [rankcounts.count(i) for i in range(6)]
+	
+	# flushsuit is in the range [0,3] if all cards have that suit; otherwise -1
+	minsuit = min(suit for (_, suit) in hand)
+	maxsuit = max(suit for (_, suit) in hand)
+	flushsuit = minsuit if minsuit == maxsuit else -1
+	
+	bestcards = get_5_frequent_highest_cards(rankcounts, rankcounthist)
+	straighthighrank = get_straight_high_rank(rankcounts)
+	
+	# Main idea: Encode the hand type in the top bits, then encode up to 5 cards in big-endian (4 bits each).
+	if   straighthighrank != -1 and flushsuit != -1     : return 8 << 20 | straighthighrank  # Straight flush
+	elif rankcounthist[4] == 1                          : return 7 << 20 | bestcards         # Four of a kind
+	elif rankcounthist[3] == 1 and rankcounthist[2] == 1: return 6 << 20 | bestcards         # Full house
+	elif flushsuit != -1                                : return 5 << 20 | bestcards         # Flush
+	elif straighthighrank != -1                         : return 4 << 20 | straighthighrank  # Straight
+	elif rankcounthist[3] == 1                          : return 3 << 20 | bestcards         # Three of a kind
+	elif rankcounthist[2] == 2                          : return 2 << 20 | bestcards         # Two pairs
+	elif rankcounthist[2] == 1                          : return 1 << 20 | bestcards         # One pair
+	else                                                : return 0 << 20 | bestcards         # High card
+
+def compute():
+	ans = sum(1 for handpair in HANDS if is_player1_win(handpair))
+	return str(ans)
+
+
+# Handpair is a space-separated string of 10 cards.
+def is_player1_win(handpair):
+	# Parse cards and divide among players
+	cards = [parse_card(item) for item in handpair.split(" ")]
+	assert len(cards) == 10
+	player1 = cards[ : 5]
+	player2 = cards[5 : ]
+	# Compare hand scores
+	return get_score(player1) > get_score(player2)
